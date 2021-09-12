@@ -1,22 +1,9 @@
-kather/
-_jobs/
-
-# Custom stuff
-*.tar.gz
-*.gz
-*.zip
-*.pkl
-*.png
-*.npz
-*.pth
-*.hdf5
-*.h5
-.*.swp
-*.pdf
-.vscode/
-data/
+# pytorch dataset
 data
-log/
+snapshots
+
+# trash
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
