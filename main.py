@@ -6,6 +6,7 @@ from torchvision import datasets, transforms, models
 
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor
+from core import apply_encoder
 
 from models import Discriminator, LeNetClassifier, LeNetEncoder
 from models import Progenitor, Descendant, Successor
@@ -90,6 +91,11 @@ if __name__ == '__main__':
     eval_tgt(tgt_encoder, src_classifier, tgt_data_loader_eval)
     print(">>> enforced transfer without ood <<<")
     eval_tgt(tgt_encoder, tgt_classifier, tgt_data_loader_eval)
+
+    print("=== Starting to apply the source encoder on the source dataset ===")
+    apply_encoder(src_encoder, src_data_loader, 'src')
+    print("=== Starting to apply the target encoder on the source dataset ===")
+    apply_encoder(tgt_encoder, tgt_data_loader, 'tgt')
 
     #TODO:
     '''
