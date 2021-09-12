@@ -33,26 +33,25 @@ if __name__ == '__main__':
 
     # load dataset
 
-    #src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
-    #src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
-    #tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
-    #tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
+    src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
+    src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
+    tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
+    tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
-    tgt_data_loader = get_cifar_10(train=True)
-    tgt_data_loader_eval = get_cifar_10(train=False)
-
-    src_data_loader = get_stl_10(split='train')
-    src_data_loader_eval = get_stl_10(split='test')
+    #tgt_data_loader = get_cifar_10(train=True)
+    #tgt_data_loader_eval = get_cifar_10(train=False)
+    #src_data_loader = get_stl_10(split='train')
+    #src_data_loader_eval = get_stl_10(split='test')
 
     progenitor = models.resnet50(pretrained=True)
-    progenitor.fc = torch.nn.Linear(2048, 10)
+    progenitor.fc = torch.nn.Linear(2048, 31)
     progenitor = progenitor.to(torch.device('cuda:0'))
 
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[:-1]))
-    src_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
+    src_classifier = torch.nn.Linear(2048, 31).to(torch.device('cuda:0'))
 
     tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[:-1]))
-    tgt_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
+    tgt_classifier = torch.nn.Linear(2048, 31).to(torch.device('cuda:0'))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
@@ -91,3 +90,14 @@ if __name__ == '__main__':
     print("=== Evaluating classifier for encoded target domain ===")
     print(">>> only source encoder <<<")
     eval_tgt(src_encoder, src_classifier, tgt_data_loader_eval)
+    print(">>> only target encoder <<<")
+    eval_tgt(tgt_encoder, tgt_classifier, tgt_data_loader_eval)
+
+    #TODO:
+    '''
+    experiment #1:
+    
+    1. calculate E_s(X_s) and E_t(X_t) to form a new dataloader.
+    2. train a classifier on the new data_loader
+    3. Use the new classifier and E_t() to classify X_t_eval
+    '''
