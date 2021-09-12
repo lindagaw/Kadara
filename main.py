@@ -29,15 +29,15 @@ if __name__ == '__main__':
 
     # load dataset
 
-    src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
-    src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
-    tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
-    tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
+    #src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
+    #src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
+    #tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
+    #tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
-    #tgt_data_loader = get_cifar_10(train=True)
-    #tgt_data_loader_eval = get_cifar_10(train=False)
-    #src_data_loader = get_stl_10(split='train')
-    #src_data_loader_eval = get_stl_10(split='test')
+    tgt_data_loader = get_cifar_10(train=True)
+    tgt_data_loader_eval = get_cifar_10(train=False)
+    src_data_loader = get_stl_10(split='train')
+    src_data_loader_eval = get_stl_10(split='test')
 
     progenitor = models.resnet50(pretrained=True)
     progenitor.fc = torch.nn.Linear(2048, 31)
