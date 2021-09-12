@@ -87,6 +87,8 @@ if __name__ == '__main__':
     print(">>> only source encoder <<<")
     eval_tgt(src_encoder, src_classifier, tgt_data_loader_eval)
     print(">>> only target encoder <<<")
+    eval_tgt(tgt_encoder, src_classifier, tgt_data_loader_eval)
+    print(">>> enforced transfer without ood <<<")
     eval_tgt(tgt_encoder, tgt_classifier, tgt_data_loader_eval)
 
     #TODO:
