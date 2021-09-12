@@ -6,10 +6,6 @@ from torchvision import datasets, transforms, models
 
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor
-from core import eval_tgt_with_probe
-from core import get_distribution, eval_ADDA
-
-from activations import apply_descendant, apply_successor
 
 from models import Discriminator, LeNetClassifier, LeNetEncoder
 from models import Progenitor, Descendant, Successor
@@ -96,8 +92,13 @@ if __name__ == '__main__':
     #TODO:
     '''
     experiment #1:
-    
+
     1. calculate E_s(X_s) and E_t(X_t) to form a new dataloader.
     2. train a classifier on the new data_loader
     3. Use the new classifier and E_t() to classify X_t_eval
+
+    experiment #2:
+    What if you don't use the Encoders; just train directly on lumping X_s and X_t together?
+
+
     '''
