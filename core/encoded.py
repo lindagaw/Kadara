@@ -7,7 +7,7 @@ from utils import make_variable, save_model
 import numpy as np
 import os
 
-def apply_encoder(encoder, data_loader, dest):
+def apply_encoder(encoder, data_loader, dest, train_or_eval):
     """return an encoded dataset."""
 
     print('start calculating the encoded values on the src/tgt dataset ...')
@@ -35,9 +35,14 @@ def apply_encoder(encoder, data_loader, dest):
             encoded_xs.append(single_encoded)
             encoded_ys.append(label)
 
+    encoded_xs = np.asarray(encoded_xs)
+    encoded_ys = np.asarray(encoded_ys)
 
-    np.save('snapshots//' + dest + '_encoded_xs.npy', encoded_xs)
-    np.save('snapshots//' + dest + 'encoded_ys.npy', encoded_ys)
+    print('encoded xs has shape ' + str(encoded_xs.shape))
+    print('encoded ys has shape ' + str(encoded_ys.shape))
+
+    np.save('snapshots//' + dest + '_' + train_or_eval + '_encoded_xs.npy', encoded_xs)
+    np.save('snapshots//' + dest + '_' + train_or_eval + '_encoded_ys.npy', encoded_ys)
 
 
     return encoded_xs, encoded_ys
