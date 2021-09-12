@@ -15,7 +15,7 @@ from models import LeNet_Conv_1_Encoder, LeNet_Conv_1_Classifier, LeNet_Conv_2_E
 from utils import get_data_loader, init_model, init_random_seed, load_chopped_state_dict
 
 from datasets import get_conv_1_activations, get_conv_2_activations
-from datasets import get_office_home, get_office_31
+from datasets import get_office_home, get_office_10
 from datasets import get_cifar_10, get_stl_10
 from datasets import get_src_encoded, get_tgt_encoded
 
@@ -31,10 +31,10 @@ if __name__ == '__main__':
 
     # load dataset
 
-    #src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
-    #src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
-    #tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
-    #tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
+    #src_data_loader = get_office_10(dataset = 'office-10-amazon', train=True)
+    #src_data_loader_eval = get_office_10(dataset = 'office-10-amazon', train=False)
+    #tgt_data_loader = get_office_10(dataset = 'office-10-webcam', train=True)
+    #tgt_data_loader_eval = get_office_10(dataset = 'office-10-webcam', train=False)
 
     tgt_data_loader = get_cifar_10(train=True)
     tgt_data_loader_eval = get_cifar_10(train=False)
@@ -42,14 +42,14 @@ if __name__ == '__main__':
     src_data_loader_eval = get_stl_10(split='test')
 
     progenitor = models.resnet50(pretrained=True)
-    progenitor.fc = torch.nn.Linear(2048, 31)
+    progenitor.fc = torch.nn.Linear(2048, 10)
     progenitor = progenitor.to(torch.device('cuda:0'))
 
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[:-1]))
-    src_classifier = torch.nn.Linear(2048, 31).to(torch.device('cuda:0'))
+    src_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
 
     tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[:-1]))
-    tgt_classifier = torch.nn.Linear(2048, 31).to(torch.device('cuda:0'))
+    tgt_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     encoded_src_data_loader = get_src_encoded(train=True)
     encoded_src_data_loader_eval = get_src_encoded(train=False)
 
-    classifier = torch.nn.Linear(2048, 31).to(torch.device('cuda:0'))
+    classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
 
     train_encoded(classifier, encoded_src_data_loader, encoded_src_data_loader_eval)
     train_encoded(classifier, encoded_tgt_data_loader, encoded_tgt_data_loader_eval)
