@@ -46,10 +46,10 @@ if __name__ == '__main__':
     progenitor = progenitor.to(torch.device('cuda:0'))
 
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[:-1]))
-    src_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
+    src_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:1'))
 
     tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[:-1]))
-    tgt_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
+    tgt_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:1'))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     encoded_src_data_loader = get_src_encoded(train=True)
     encoded_src_data_loader_eval = get_src_encoded(train=False)
 
-    classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
+    classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:1'))
 
     train_encoded(classifier, encoded_src_data_loader, encoded_src_data_loader_eval)
     train_encoded(classifier, encoded_tgt_data_loader, encoded_tgt_data_loader_eval)
