@@ -75,7 +75,7 @@ if __name__ == '__main__':
     print(">>> Source Classifier <<<")
     print(src_classifier)
 
-    if os.path.isfile("snapshots//symbiosis-GAN-source-encoder-final.pt") and
+    if os.path.isfile("snapshots//symbiosis-GAN-source-encoder-final.pt") and \
         os.path.isfile("snapshots//symbiosis-GAN-source-classifier-final.pt"):
         src_encoder = init_model(src_encoder,
                             restore="snapshots//symbiosis-GAN-source-encoder-final.pt")
