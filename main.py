@@ -47,9 +47,9 @@ if __name__ == '__main__':
 
 
     src_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
-    src_classifier = torch.nn.Linear(2048, 10)
+    src_classifier = torch.nn.Linear(2048, 31)
     tgt_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
-    tgt_classifier = torch.nn.Linear(2048, 10)
+    tgt_classifier = torch.nn.Linear(2048, 31)
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
                                       output_dims=params.d_output_dims),
@@ -128,7 +128,7 @@ if __name__ == '__main__':
     encoded_src_data_loader_eval = get_src_encoded(train=False)
 
     #classifier = nn.DataParallel(torch.nn.Linear(2048, 10)).to(device)
-    classifier = torch.nn.Linear(2048, 10).to(device)
+    classifier = torch.nn.Linear(2048, 31).to(device)
 
     train_encoded(classifier, encoded_src_data_loader, encoded_src_data_loader_eval)
     train_encoded(classifier, encoded_tgt_data_loader, encoded_tgt_data_loader_eval)
