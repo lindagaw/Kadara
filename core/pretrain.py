@@ -90,8 +90,8 @@ def eval_src(encoder, classifier, data_loader):
 
     # evaluate network
     for (images, labels) in data_loader:
-        images = make_variable(images, volatile=True)
-        labels = make_variable(labels)
+        images = make_variable(images.squeeze_())
+        labels = make_variable(labels.squeeze_())
 
         encoded = torch.squeeze(encoder(images))
 
