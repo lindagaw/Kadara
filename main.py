@@ -96,7 +96,12 @@ if __name__ == '__main__':
     print(">>> Critic <<<")
     print(critic)
 
-    tgt_encoder = train_tgt(src_encoder, tgt_encoder, critic,
+    if os.path.isfile("snapshots//symbiosis-GAN-critic-final.pt") and \
+        os.path.isfile("snapshots//symbiosis-GAN-target-encoder-final.pt"):
+        critic = init_model(critic, ="snapshots//symbiosis-GAN-critic-final.pt")
+        tgt_encoder = init_model(tgt_encoder, "snapshots//symbiosis-GAN-target-encoder-final.pt")
+    else:
+        tgt_encoder = train_tgt(src_encoder, tgt_encoder, critic,
                                 src_data_loader, tgt_data_loader)
 
     # eval target encoder on test set of target dataset
@@ -120,7 +125,7 @@ if __name__ == '__main__':
     encoded_src_data_loader = get_src_encoded(train=True)
     encoded_src_data_loader_eval = get_src_encoded(train=False)
 
-    classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
+    classifier = nn.DataParallel(torch.nn.Linear(2048, 10)).to(device)
 
     train_encoded(classifier, encoded_src_data_loader, encoded_src_data_loader_eval)
     train_encoded(classifier, encoded_tgt_data_loader, encoded_tgt_data_loader_eval)

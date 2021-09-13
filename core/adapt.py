@@ -116,10 +116,10 @@ def train_tgt(src_encoder, tgt_encoder, critic, src_data_loader, tgt_data_loader
 
     torch.save(critic.state_dict(), os.path.join(
         params.model_root,
-        "ADDA-critic-final.pt"))
+        "symbiosis-GAN-critic-final.pt"))
     torch.save(tgt_encoder.state_dict(), os.path.join(
         params.model_root,
-        "ADDA-target-encoder-final.pt"))
+        "symbiosis-GAN-target-encoder-final.pt"))
     return tgt_encoder
 
 def train_tgt_classifier(encoder, classifier, data_loader):
