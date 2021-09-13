@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
     if os.path.isfile("snapshots//symbiosis-GAN-critic-final.pt") and \
         os.path.isfile("snapshots//symbiosis-GAN-target-encoder-final.pt"):
-        critic = init_model(critic, ="snapshots//symbiosis-GAN-critic-final.pt")
+        critic = init_model(critic, "snapshots//symbiosis-GAN-critic-final.pt")
         tgt_encoder = init_model(tgt_encoder, "snapshots//symbiosis-GAN-target-encoder-final.pt")
     else:
         tgt_encoder = train_tgt(src_encoder, tgt_encoder, critic,
