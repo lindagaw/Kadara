@@ -35,15 +35,15 @@ if __name__ == '__main__':
 
     # load dataset
 
-    #src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
-    #src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
-    #tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
-    #tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
+    src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
+    src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
+    tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
+    tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
-    src_data_loader = get_cifar_10(train=True)
-    src_data_loader_eval = get_cifar_10(train=False)
-    tgt_data_loader = get_stl_10(split='train')
-    tgt_data_loader_eval = get_stl_10(split='test')
+    #src_data_loader = get_cifar_10(train=True)
+    #src_data_loader_eval = get_cifar_10(train=False)
+    #tgt_data_loader = get_stl_10(split='train')
+    #tgt_data_loader_eval = get_stl_10(split='test')
 
 
     src_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
