@@ -47,7 +47,7 @@ if __name__ == '__main__':
     progenitor.fc = torch.nn.Linear(2048, 10)
 
     progenitor = nn.DataParallel(progenitor)
-    progenitor.to(torch.device('cuda:0'))
+    progenitor = progenitor.to(torch.device('cuda:0'))
 
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[:-1]))
     src_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
