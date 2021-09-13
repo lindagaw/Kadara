@@ -40,20 +40,15 @@ if __name__ == '__main__':
     #tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
     #tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
-    tgt_data_loader = get_cifar_10(train=True)
-    tgt_data_loader_eval = get_cifar_10(train=False)
-    src_data_loader = get_stl_10(split='train')
-    src_data_loader_eval = get_stl_10(split='test')
+    src_data_loader = get_cifar_10(train=True)
+    src_data_loader_eval = get_cifar_10(train=False)
+    tgt_data_loader = get_stl_10(split='train')
+    tgt_data_loader_eval = get_stl_10(split='test')
 
-    progenitor = models.resnet50(pretrained=True)
-    progenitor.fc = torch.nn.Linear(2048, 10)
 
-    #progenitor = nn.DataParallel(progenitor)
-    #progenitor = progenitor.to(torch.device('cuda:0'))
-
-    src_encoder = torch.nn.Sequential(*(list(progenitor.children())[:-1]))
+    src_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
     src_classifier = torch.nn.Linear(2048, 10)
-    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[:-1]))
+    tgt_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
     tgt_classifier = torch.nn.Linear(2048, 10)
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
@@ -67,7 +62,7 @@ if __name__ == '__main__':
         src_classifier = nn.DataParallel(src_classifier)
         tgt_encoder = nn.DataParallel(tgt_encoder)
         tgt_classifier = nn.DataParallel(tgt_classifier)
-    
+
     src_encoder.to(device)
     src_classifier.to(device)
     tgt_encoder.to(device)
@@ -80,8 +75,15 @@ if __name__ == '__main__':
     print(">>> Source Classifier <<<")
     print(src_classifier)
 
-    src_encoder, src_classifier = train_src(
-        src_encoder, src_classifier, src_data_loader)
+    if os.path.isfile("snapshots//symbiosis-GAN-source-encoder-final.pt") and
+        os.path.isfile("snapshots//symbiosis-GAN-source-classifier-final.pt"):
+        src_encoder = init_model(src_encoder,
+                            restore="snapshots//symbiosis-GAN-source-encoder-final.pt")
+        src_classifier = init_model(src_classifier,
+                            restore="snapshots//symbiosis-GAN-source-classifier-final.pt")
+    else:
+        src_encoder, src_classifier = train_src(
+            src_encoder, src_classifier, src_data_loader)
 
     # eval source model
     print("=== Evaluating classifier for source domain ===")
@@ -96,10 +98,6 @@ if __name__ == '__main__':
 
     tgt_encoder = train_tgt(src_encoder, tgt_encoder, critic,
                                 src_data_loader, tgt_data_loader)
-
-    tgt_encoder, tgt_classifier = train_tgt_classifier(
-        tgt_encoder, tgt_classifier, tgt_data_loader)
-
 
     # eval target encoder on test set of target dataset
     print("=== Evaluating classifier for encoded target domain ===")

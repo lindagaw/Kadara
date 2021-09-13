@@ -113,16 +113,6 @@ def train_tgt(src_encoder, tgt_encoder, critic, src_data_loader, tgt_data_loader
                               loss_tgt.data,
                               acc.data))
 
-        #############################
-        # 2.4 save model parameters #
-        #############################
-        if ((epoch + 1) % params.save_step == 0):
-            torch.save(critic.state_dict(), os.path.join(
-                params.model_root,
-                "ADDA-critic-{}.pt".format(epoch + 1)))
-            torch.save(tgt_encoder.state_dict(), os.path.join(
-                params.model_root,
-                "ADDA-target-encoder-{}.pt".format(epoch + 1)))
 
     torch.save(critic.state_dict(), os.path.join(
         params.model_root,
