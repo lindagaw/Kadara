@@ -46,7 +46,7 @@ if __name__ == '__main__':
     progenitor = models.resnet50(pretrained=True)
     progenitor.fc = torch.nn.Linear(2048, 10)
 
-    progenitor = nn.DataParallel(progenitor)
+    #progenitor = nn.DataParallel(progenitor)
     progenitor = progenitor.to(torch.device('cuda:0'))
 
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[:-1]))
