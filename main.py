@@ -46,9 +46,9 @@ if __name__ == '__main__':
     #tgt_data_loader_eval = get_stl_10(split='test')
 
 
-    src_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
+    src_encoder = torch.nn.Sequential(*(list(models.resnet101(pretrained=True).children())[:-1]))
     src_classifier = torch.nn.Linear(2048, 31)
-    tgt_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
+    tgt_encoder = torch.nn.Sequential(*(list(models.resnet101(pretrained=True).children())[:-1]))
     tgt_classifier = torch.nn.Linear(2048, 31)
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
