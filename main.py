@@ -20,6 +20,8 @@ from datasets import get_cifar_10, get_stl_10
 from datasets import get_src_encoded, get_tgt_encoded
 
 import torch
+import torch.nn as nn
+
 import os
 import gc
 gc.collect()
