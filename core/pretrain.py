@@ -64,13 +64,13 @@ def train_src(encoder, classifier, data_loader):
 
         # save model parameters
         if ((epoch + 1) % params.save_step_pre == 0):
-            save_model(encoder, "snapshots//symbiosis-GAN-source-encoder-{}.pt".format(epoch + 1))
+            save_model(encoder, "symbiosis-GAN-source-encoder-{}.pt".format(epoch + 1))
             save_model(
-                classifier, "snapshots//symbiosis-GAN-source-classifier-{}.pt".format(epoch + 1))
+                classifier, "symbiosis-GAN-source-classifier-{}.pt".format(epoch + 1))
 
     # # save final model
-    save_model(encoder, "snapshots//symbiosis-GAN-source-encoder-final.pt")
-    save_model(classifier, "snapshots//symbiosis-GAN-source-classifier-final.pt")
+    save_model(encoder, "symbiosis-GAN-source-encoder-final.pt")
+    save_model(classifier, "symbiosis-GAN-source-classifier-final.pt")
 
     return encoder, classifier
 

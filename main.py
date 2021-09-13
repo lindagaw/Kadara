@@ -136,14 +136,6 @@ if __name__ == '__main__':
 
     #TODO:
     '''
-    experiment #1:
-
-    1. calculate E_s(X_s) and E_t(X_t) to form a new dataloader.
-    2. train a classifier on the new data_loader
-    3. Use the new classifier and E_t() to classify X_t_eval
-
     experiment #2:
     What if you don't use the Encoders; just train directly on lumping X_s and X_t together?
-
-
     '''
