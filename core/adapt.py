@@ -175,7 +175,7 @@ def train_tgt_classifier(encoder, classifier, data_loader):
     torch.save(encoder.state_dict(), os.path.join(
         params.model_root,
         "symbiosis-GAN-target-encoder-final.pt"))
-    return tgt_encoder
+    return encoder
 
 
     return encoder, classifier
