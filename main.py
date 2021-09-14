@@ -55,7 +55,7 @@ if __name__ == '__main__':
                                       output_dims=params.d_output_dims),
                         restore=params.d_model_restore)
 
-    '''
+    
     if torch.cuda.device_count() > 1:
         print("Let's use", torch.cuda.device_count(), "GPUs!")
         src_encoder = nn.DataParallel(src_encoder)
@@ -63,7 +63,7 @@ if __name__ == '__main__':
         tgt_encoder = nn.DataParallel(tgt_encoder)
         tgt_classifier = nn.DataParallel(tgt_classifier)
         critic = nn.DataParallel(critic)
-    '''
+
     src_encoder.to(device)
     src_classifier.to(device)
     tgt_encoder.to(device)
