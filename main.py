@@ -61,7 +61,7 @@ if __name__ == '__main__':
         src_encoder = nn.DataParallel(src_encoder)
         src_classifier = nn.DataParallel(src_classifier)
         tgt_encoder = nn.DataParallel(tgt_encoder)
-        tgt_classifier = nn.DataParallel(tgt_classifier)
+        #tgt_classifier = nn.DataParallel(tgt_classifier)
         critic = nn.DataParallel(critic)
 
     src_encoder.to(device)
