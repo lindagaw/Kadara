@@ -109,7 +109,7 @@ if __name__ == '__main__':
         tgt_encoder = train_tgt(src_encoder, tgt_encoder, critic,
                                 src_data_loader, tgt_data_loader)
         tgt_encoder, tgt_classifier = train_tgt_classifier(tgt_encoder, tgt_classifier, tgt_data_loader)
-        
+
     # eval target encoder on test set of target dataset
     print("=== Evaluating classifier for encoded target domain ===")
     print(">>> only source encoder <<<")
@@ -119,7 +119,7 @@ if __name__ == '__main__':
     print(">>> enforced transfer without ood <<<")
     eval_tgt(tgt_encoder, tgt_classifier, tgt_data_loader_eval)
 
-'''
+
     print("=== Starting to apply the source encoder on the source dataset ===")
     apply_encoder(src_encoder, src_data_loader, 'src', 'train')
     apply_encoder(src_encoder, src_data_loader_eval, 'src', 'eval')
@@ -135,12 +135,11 @@ if __name__ == '__main__':
     #classifier = nn.DataParallel(torch.nn.Linear(2048, 10)).to(device)
     classifier = nn.DataParallel(torch.nn.Linear(2048, 10)).to(device)
 
-    train_encoded(classifier, encoded_src_data_loader, encoded_src_data_loader_eval)
-    train_encoded(classifier, encoded_tgt_data_loader, encoded_tgt_data_loader_eval)
+    classifier = train_encoded(classifier, encoded_src_data_loader, encoded_src_data_loader_eval)
+    classifier = train_encoded(classifier, encoded_tgt_data_loader, encoded_tgt_data_loader_eval)
 
     print("=== Evaluation result of Symbiosis GAN ===")
     eval_encoded(classifier, encoded_tgt_data_loader_eval)
 
 
     #TODO:
-'''
