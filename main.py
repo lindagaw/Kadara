@@ -35,21 +35,21 @@ if __name__ == '__main__':
 
     # load dataset
 
-    src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
-    src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
-    tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
-    tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
+    #src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
+    #src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
+    #tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
+    #tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
-    #src_data_loader = get_cifar_10(train=True)
-    #src_data_loader_eval = get_cifar_10(train=False)
-    #tgt_data_loader = get_stl_10(split='train')
-    #tgt_data_loader_eval = get_stl_10(split='test')
+    src_data_loader = get_cifar_10(train=True)
+    src_data_loader_eval = get_cifar_10(train=False)
+    tgt_data_loader = get_stl_10(split='train')
+    tgt_data_loader_eval = get_stl_10(split='test')
 
 
     src_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
-    src_classifier = torch.nn.Linear(2048, 31)
+    src_classifier = torch.nn.Linear(2048, 10)
     tgt_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
-    tgt_classifier = torch.nn.Linear(2048, 31)
+    tgt_classifier = torch.nn.Linear(2048, 10)
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
                                       output_dims=params.d_output_dims),
@@ -135,7 +135,7 @@ if __name__ == '__main__':
     encoded_src_data_loader_eval = get_src_encoded(train=False)
 
     #classifier = nn.DataParallel(torch.nn.Linear(2048, 10)).to(device)
-    classifier = nn.DataParallel(torch.nn.Linear(2048, 31)).to(device)
+    classifier = nn.DataParallel(torch.nn.Linear(2048, 10)).to(device)
 
     classifier = train_encoded(classifier, encoded_src_data_loader, encoded_src_data_loader_eval)
     classifier = train_encoded(classifier, encoded_tgt_data_loader, encoded_tgt_data_loader_eval)
