@@ -76,7 +76,10 @@ def init_model(net, restore):
         pass
     # restore model weights
     if restore is not None and os.path.exists(restore):
-        net.load_state_dict(torch.load(restore))
+        try:
+            net.load_state_dict(torch.load(restore))
+        except:
+            net.load_state_dict(torch.load(restore, map_location=torch.device('cpu')))
         net.restored = True
         print("Restore model from: {}".format(os.path.abspath(restore)))
 
