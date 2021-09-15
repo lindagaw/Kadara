@@ -119,6 +119,8 @@ if __name__ == '__main__':
     print(">>> enforced transfer without ood <<<")
     eval_tgt(tgt_encoder, tgt_classifier, tgt_data_loader_eval)
 
+    gc.collect()
+    torch.cuda.empty_cache()
 
     print("=== Starting to apply the source encoder on the source dataset ===")
     apply_encoder(src_encoder, src_data_loader, 'src', 'train')
