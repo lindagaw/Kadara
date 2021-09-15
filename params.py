@@ -6,7 +6,7 @@ dataset_mean_value = 0.5
 dataset_std_value = 0.5
 dataset_mean = (dataset_mean_value, dataset_mean_value, dataset_mean_value)
 dataset_std = (dataset_std_value, dataset_std_value, dataset_std_value)
-batch_size = 32
+batch_size = 32/2
 image_size = 64
 
 progenitor_restore = "snapshots//progenitor-final.pt"
