@@ -17,7 +17,7 @@ def apply_encoder(encoder, data_loader, dest, train_or_eval):
 
     # set train state for Dropout and BN layers
     encoder.eval()
-
+    torch.no_grad()
     ####################
     # 2. train network #
     ####################
@@ -26,8 +26,10 @@ def apply_encoder(encoder, data_loader, dest, train_or_eval):
     encoded_ys = []
 
     for step, (images, labels) in enumerate(data_loader):
-        images = make_variable(images.squeeze_())
-        labels = make_variable(labels.squeeze_())
+        #images = make_variable(images.squeeze_())
+        #labels = make_variable(labels.squeeze_())
+        images = images.squeeze_()
+        labels = labels.squeeze_()
         encoded = torch.squeeze(encoder(images))
 
         for label, single_encoded in zip(labels, encoded):
