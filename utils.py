@@ -79,6 +79,7 @@ def init_model(net, restore):
         try:
             net.load_state_dict(torch.load(restore))
         except:
+            print('load model on cpu.')
             net.load_state_dict(torch.load(restore, map_location=torch.device('cpu')))
         net.restored = True
         print("Restore model from: {}".format(os.path.abspath(restore)))
