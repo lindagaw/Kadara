@@ -35,18 +35,15 @@ if __name__ == '__main__':
 
     # load dataset
 
-    src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
-    src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
+    src_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
+    src_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
     tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
-    #print(models.resnet18(pretrained=True))
-    #print('-------------------------------')
-
-    src_encoder = torch.nn.Sequential(*(list(models.resnet18(pretrained=True).children())[:-1]))
-    src_classifier = torch.nn.Linear(512, 31)
-    tgt_encoder = torch.nn.Sequential(*(list(models.resnet18(pretrained=True).children())[:-1]))
-    tgt_classifier = torch.nn.Linear(512, 31)
+    src_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
+    src_classifier = torch.nn.Linear(2048, 31)
+    tgt_encoder = torch.nn.Sequential(*(list(models.resnet50(pretrained=True).children())[:-1]))
+    tgt_classifier = torch.nn.Linear(2048, 31)
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
                                       output_dims=params.d_output_dims),
