@@ -40,6 +40,9 @@ if __name__ == '__main__':
     tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
+    print(models.resnet18(pretrained=True))
+    print('-------------------------------')
+
     src_encoder = torch.nn.Sequential(*(list(models.resnet18(pretrained=True).children())[:-1]))
     src_classifier = torch.nn.Linear(2048, 31)
     tgt_encoder = torch.nn.Sequential(*(list(models.resnet18(pretrained=True).children())[:-1]))
