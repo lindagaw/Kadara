@@ -7,7 +7,7 @@ import params
 from utils import make_variable, save_model
 
 
-def train_src(encoder, classifier, data_loader):
+def train_src(encoder, classifier, data_loader, data_loader_eval):
     """Train classifier for source domain."""
     ####################
     # 1. setup network #
@@ -59,8 +59,12 @@ def train_src(encoder, classifier, data_loader):
                               loss.data))
 
         # eval model on test set
+        print('Outputting the validation accuracy ...')
         if ((epoch + 1) % params.eval_step_pre == 0):
             eval_src(encoder, classifier, data_loader)
+        print('Outputting the testing accuracy ...')
+        if ((epoch + 1) % params.eval_step_pre == 0):
+            eval_src(encoder, classifier, data_loader_eval)
 
         # save model parameters
         if ((epoch + 1) % params.save_step_pre == 0):
