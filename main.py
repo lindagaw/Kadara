@@ -85,7 +85,7 @@ if __name__ == '__main__':
                             restore="snapshots//symbiosis-GAN-source-classifier-final.pt")
     else:
         src_encoder, src_classifier = train_src(
-            src_encoder, src_classifier, src_data_loader)
+            src_encoder, src_classifier, src_data_loader, src_data_loader_eval)
 
     # eval source model
     print("=== Evaluating classifier for source domain ===")
