@@ -50,13 +50,13 @@ def train_src(encoder, classifier, data_loader, data_loader_eval):
             optimizer.step()
 
             # print step info
-            if ((step + 1) % params.log_step_pre == 0):
-                print("Epoch [{}/{}] Step [{}/{}]: loss={}"
-                      .format(epoch + 1,
-                              params.num_epochs_pre,
-                              step + 1,
-                              len(data_loader),
-                              loss.data))
+            #if ((step + 1) % params.log_step_pre == 0):
+            print("Epoch [{}/{}] Step [{}/{}]: loss={}"
+                  .format(epoch + 1,
+                          params.num_epochs_pre,
+                          step + 1,
+                          len(data_loader),
+                          loss.data))
 
         # eval model on test set
 
