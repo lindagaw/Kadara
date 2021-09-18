@@ -1,4 +1,4 @@
-"""Params for ADDA."""
+1"""Params for ADDA."""
 
 # params for dataset and data loader
 data_root = "data"
@@ -32,7 +32,7 @@ d_model_restore = "snapshots/ADDA-critic-final.pt"
 # params for training network
 num_gpu = 2
 num_epochs_pre = 1000 #280
-log_step_pre = 20
+log_step_pre = 1
 eval_step_pre = 20
 save_step_pre = 400
 num_epochs = 15

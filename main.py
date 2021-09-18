@@ -84,6 +84,7 @@ if __name__ == '__main__':
         src_classifier = init_model(src_classifier,
                             restore="snapshots//symbiosis-GAN-source-classifier-final.pt")
     else:
+        print("started to train the source encoder and source classifier...")
         src_encoder, src_classifier = train_src(
             src_encoder, src_classifier, src_data_loader, src_data_loader_eval)
 
