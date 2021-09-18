@@ -1,4 +1,3 @@
-(myenv) -bash-4.2$vi myjobs.25843213_4294967294.out
 #!/bin/bash
 #SBATCH --nodes=20 #total number of nodes for the job
 #SBATCH --ntasks=1 #how many copies of code to run
