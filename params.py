@@ -1,4 +1,4 @@
-1"""Params for ADDA."""
+"""Params for ADDA."""
 
 # params for dataset and data loader
 data_root = "data"
