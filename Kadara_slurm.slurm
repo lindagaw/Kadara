@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --job-name="Kadara"
-#SBATCH --error="Kadara.err"
-#SBATCH --output="Kadara.output"
+#SBATCH --error="slurm.err"
+#SBATCH --output="slurm.out"
 #SBATCH --reservation=yg9ca_43
 #SBATCH --gres=gpu:4
 #SBATCH --partition=gpu
