@@ -33,6 +33,8 @@ if __name__ == '__main__':
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
+    print(device)
+
     # load dataset
 
     #src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)

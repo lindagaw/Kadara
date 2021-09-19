@@ -31,15 +31,12 @@ def train_src(encoder, classifier, data_loader, data_loader_eval):
     for epoch in range(params.num_epochs_pre):
         for step, (images, labels) in enumerate(data_loader):
 
-            print('hello')
             # make images and labels variable
             images = make_variable(images.squeeze_())
             labels = make_variable(labels.squeeze_())
 
             # zero gradients for optimizer
             optimizer.zero_grad()
-
-            print('after optimizer.zero_grad')
 
             # compute loss for critic
             encoded = torch.squeeze(encoder(images))
@@ -49,14 +46,9 @@ def train_src(encoder, classifier, data_loader, data_loader_eval):
             preds = classifier(encoded)
             loss = criterion(preds, labels)
 
-            print('after preds and loss')
-
             # optimize source classifier
             loss.backward()
             optimizer.step()
-
-            print('helllllllllo')
-
 
             # print step info
             if ((step + 1) % params.log_step_pre == 0):
