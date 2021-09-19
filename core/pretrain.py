@@ -30,6 +30,8 @@ def train_src(encoder, classifier, data_loader, data_loader_eval):
 
     for epoch in range(params.num_epochs_pre):
         for step, (images, labels) in enumerate(data_loader):
+
+            print('hello')
             # make images and labels variable
             images = make_variable(images.squeeze_())
             labels = make_variable(labels.squeeze_())
@@ -48,6 +50,7 @@ def train_src(encoder, classifier, data_loader, data_loader_eval):
             # optimize source classifier
             loss.backward()
             optimizer.step()
+            print('goodbye')
 
             # print step info
             #if ((step + 1) % params.log_step_pre == 0):
