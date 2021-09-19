@@ -40,7 +40,6 @@ def train_src(encoder, classifier, data_loader, data_loader_eval):
 
             # compute loss for critic
             encoded = encoder(images)
-            print('hello')
             encoded = encoded.squeeze_()
 
             print(encoded.shape)

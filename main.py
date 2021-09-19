@@ -57,11 +57,11 @@ if __name__ == '__main__':
 
 
     print("Let's use", torch.cuda.device_count(), "GPUs!")
-    src_encoder = nn.DataParallel(src_encoder)
-    src_classifier = nn.DataParallel(src_classifier)
-    tgt_encoder = nn.DataParallel(tgt_encoder)
-    tgt_classifier = nn.DataParallel(tgt_classifier)
-    critic = nn.DataParallel(critic)
+    #src_encoder = nn.DataParallel(src_encoder)
+    #src_classifier = nn.DataParallel(src_classifier)
+    #tgt_encoder = nn.DataParallel(tgt_encoder)
+    #tgt_classifier = nn.DataParallel(tgt_classifier)
+    #critic = nn.DataParallel(critic)
 
     src_encoder.to(device)
     src_classifier.to(device)
@@ -135,7 +135,7 @@ if __name__ == '__main__':
     encoded_src_data_loader_eval = get_src_encoded(train=False)
 
     #classifier = nn.DataParallel(torch.nn.Linear(2048, 10)).to(device)
-    classifier = nn.DataParallel(torch.nn.Linear(2048, 10)).to(device)
+    classifier = torch.nn.Linear(2048, 10).to(device)
 
     classifier = train_encoded(classifier, encoded_src_data_loader, encoded_src_data_loader_eval)
     classifier = train_encoded(classifier, encoded_tgt_data_loader, encoded_tgt_data_loader_eval)
