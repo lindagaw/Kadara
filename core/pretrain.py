@@ -39,7 +39,9 @@ def train_src(encoder, classifier, data_loader, data_loader_eval):
             optimizer.zero_grad()
 
             # compute loss for critic
-            encoded = torch.squeeze(encoder(images))
+            encoded = encoder(images)
+            print('hello')
+            encoded = encoded.squeeze_()
 
             print(encoded.shape)
 
