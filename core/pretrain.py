@@ -39,27 +39,33 @@ def train_src(encoder, classifier, data_loader, data_loader_eval):
             # zero gradients for optimizer
             optimizer.zero_grad()
 
+            print('after optimizer.zero_grad')
+
             # compute loss for critic
             encoded = torch.squeeze(encoder(images))
 
-            #print(encoded.shape)
+            print(encoded.shape)
 
             preds = classifier(encoded)
             loss = criterion(preds, labels)
 
+            print('after preds and loss')
+
             # optimize source classifier
             loss.backward()
             optimizer.step()
-            print('goodbye')
+
+            print('helllllllllo')
+
 
             # print step info
-            #if ((step + 1) % params.log_step_pre == 0):
-            print("Epoch [{}/{}] Step [{}/{}]: loss={}"
-                  .format(epoch + 1,
-                          params.num_epochs_pre,
-                          step + 1,
-                          len(data_loader),
-                          loss.data))
+            if ((step + 1) % params.log_step_pre == 0):
+                print("Epoch [{}/{}] Step [{}/{}]: loss={}"
+                      .format(epoch + 1,
+                              params.num_epochs_pre,
+                              step + 1,
+                              len(data_loader),
+                              loss.data))
 
         # eval model on test set
 
