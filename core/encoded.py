@@ -28,8 +28,8 @@ def apply_encoder(encoder, data_loader, dest, train_or_eval):
     for step, (images, labels) in enumerate(data_loader):
         #images = make_variable(images.squeeze_())
         #labels = make_variable(labels.squeeze_())
-        images = images.squeeze_()
-        labels = labels.squeeze_()
+        images = images.squeeze_().cuda()
+        labels = labels.squeeze_().cuda()
         encoded = torch.squeeze(encoder(images))
 
         for label, single_encoded in zip(labels, encoded):
