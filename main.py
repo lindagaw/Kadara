@@ -122,26 +122,26 @@ if __name__ == '__main__':
     gc.collect()
     torch.cuda.empty_cache()
 
-    print("=== Starting to apply the source encoder on the source dataset ===")
-    apply_encoder(src_encoder, src_data_loader, 'src', 'train')
-    apply_encoder(src_encoder, src_data_loader_eval, 'src', 'eval')
-    print("=== Starting to apply the target encoder on the source dataset ===")
-    apply_encoder(tgt_encoder, tgt_data_loader, 'tgt', 'train')
-    apply_encoder(tgt_encoder, tgt_data_loader_eval, 'tgt', 'eval')
+    #print("=== Starting to apply the source encoder on the source dataset ===")
+    #apply_encoder(src_encoder, src_data_loader, 'src', 'train')
+    #apply_encoder(src_encoder, src_data_loader_eval, 'src', 'eval')
+    #print("=== Starting to apply the target encoder on the source dataset ===")
+    #apply_encoder(tgt_encoder, tgt_data_loader, 'tgt', 'train')
+    #apply_encoder(tgt_encoder, tgt_data_loader_eval, 'tgt', 'eval')
 
-    encoded_tgt_data_loader = get_tgt_encoded(train=True)
-    encoded_tgt_data_loader_eval = get_tgt_encoded(train=False)
-    encoded_src_data_loader = get_src_encoded(train=True)
-    encoded_src_data_loader_eval = get_src_encoded(train=False)
+    #encoded_tgt_data_loader = get_tgt_encoded(train=True)
+    #encoded_tgt_data_loader_eval = get_tgt_encoded(train=False)
+    #encoded_src_data_loader = get_src_encoded(train=True)
+    #encoded_src_data_loader_eval = get_src_encoded(train=False)
 
     #classifier = nn.DataParallel(torch.nn.Linear(2048, 10)).to(device)
-    classifier = torch.nn.Linear(2048, 10).to(device)
+    #classifier = torch.nn.Linear(2048, 10).to(device)
 
-    classifier = train_encoded(classifier, encoded_src_data_loader, encoded_src_data_loader_eval)
-    classifier = train_encoded(classifier, encoded_tgt_data_loader, encoded_tgt_data_loader_eval)
+    #classifier = train_encoded(classifier, encoded_src_data_loader, encoded_src_data_loader_eval)
+    #classifier = train_encoded(classifier, encoded_tgt_data_loader, encoded_tgt_data_loader_eval)
 
-    print("=== Evaluation result of Symbiosis GAN ===")
-    eval_encoded(classifier, encoded_tgt_data_loader_eval)
+    #print("=== Evaluation result of Symbiosis GAN ===")
+    #eval_encoded(classifier, encoded_tgt_data_loader_eval)
 
 
     #TODO:
