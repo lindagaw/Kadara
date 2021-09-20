@@ -3,8 +3,8 @@
 #SBATCH --job-name="Kadara"
 #SBATCH --error="slurm.err"
 #SBATCH --output="slurm.out"
-#SBATCH --reservation=yg9ca_43
-#SBATCH --gres=gpu:4
+#SBATCH --mem=30GB
+#SBATCH --gres=gpu:8
 #SBATCH --partition=gpu
 module load anaconda
 source activate base
