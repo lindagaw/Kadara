@@ -4,6 +4,8 @@ snapshots
 
 # trash
 .DS_Store
+*.err
+*.out
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
